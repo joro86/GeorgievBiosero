@@ -29,17 +29,17 @@ namespace Biosero.Service.Filters
 
             if(!string.IsNullOrEmpty( _bookSearchRequest.Title))
             {
-                query = query.Where(x => x.Title.Contains(_bookSearchRequest.Title));
+                query = query.Where(x => x.Title.ToLower().Contains(_bookSearchRequest.Title.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(_bookSearchRequest.Description))
             {
-                query = query.Where(x => x.Description.Contains(_bookSearchRequest.Description));
+                query = query.Where(x => x.Description.ToLower().Contains(_bookSearchRequest.Description.ToLower()));
             }
 
             if (!string.IsNullOrEmpty(_bookSearchRequest.Authour))
             {
-                query = query.Where(x => x.Author.Contains(_bookSearchRequest.Authour));
+                query = query.Where(x => x.Author.ToLower().Contains(_bookSearchRequest.Authour.ToLower()));
             }
 
             return query;
