@@ -18,7 +18,6 @@ namespace Biosero.Api.Controllers
             _bookService = bookService;
         }
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
@@ -27,6 +26,12 @@ namespace Biosero.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// User Query string parameter to serach for Title, Description, Author...
+        /// Example /api/book/list?title=book 1
+        /// </summary>
+        /// <param name="searchRequest"></param>
+        /// <returns></returns>
         [HttpGet("list")]
         public async Task<IActionResult> List([FromQuery] BookSearchRequest searchRequest)
         {

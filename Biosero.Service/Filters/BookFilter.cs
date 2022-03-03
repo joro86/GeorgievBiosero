@@ -39,7 +39,10 @@ namespace Biosero.Service.Filters
 
             if (!string.IsNullOrEmpty(_bookSearchRequest.Authour))
             {
-                query = query.Where(x => x.Author.ToLower().Contains(_bookSearchRequest.Authour.ToLower()));
+                query = query.Where(x => 
+                    x.Author.FirstName.ToLower().Contains(_bookSearchRequest.Authour.ToLower()) ||
+                     x.Author.LastName.ToLower().Contains(_bookSearchRequest.Authour.ToLower())
+                    );
             }
 
             return query;

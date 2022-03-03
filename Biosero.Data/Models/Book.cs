@@ -12,8 +12,7 @@ namespace Biosero.Data.Models
 
         public string Description { get; set; }
 
-        //TODO: Maybe use a separate class here
-        public string Author { get; set; }
+        public Author Author { get; set; }
 
         public string CoverImage { get; set; }
 

@@ -17,6 +17,9 @@ namespace Biosero.Service.Utilities
             Mapper = new Mapper(new MapperConfiguration(config => {
                 config.CreateMap<Book, BookDto>();
                 config.CreateMap<BookDto, Book>();
+
+                config.CreateMap<AuthorDto, Author>();
+                config.CreateMap<Author, AuthorDto>();
             }));
         }
     }

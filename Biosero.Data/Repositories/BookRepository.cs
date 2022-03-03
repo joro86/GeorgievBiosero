@@ -49,16 +49,16 @@ namespace Biosero.Data.Repositories
         private IList<Book> GetPrePopulatedData()
         {
             var bookList =  new List<Book> { 
-                new Book {Id = 1, Title = "Book 1", Description = "Description 1", Author= "Author 1", CoverImage = "", Price = 44} ,
-                new Book {Id = 2, Title = "Book 2", Description = "Description 2", Author= "Author 2", CoverImage = "", Price = 44},
-                new Book {Id = 3, Title = "Book 3", Description = "Description 3", Author= "Author 3", CoverImage = "", Price = 44},
-                new Book {Id = 4, Title = "Book 4", Description = "Description 4", Author= "Author 4", CoverImage = "", Price = 44},
-                new Book {Id = 5, Title = "Book 5", Description = "Description 5", Author= "Author 5", CoverImage = "", Price = 44},
-                new Book {Id = 6, Title = "Book 6", Description = "Description 6", Author= "Author 6", CoverImage = "", Price = 44},
-                new Book {Id = 7, Title = "Book 7", Description = "Description 7", Author= "Author 7", CoverImage = "", Price = 44},
-                new Book {Id = 8, Title = "Book 8", Description = "Description 8", Author= "Author 8", CoverImage = "", Price = 44},
-                new Book {Id = 9, Title = "Book 9", Description = "Description 9", Author= "Author 9", CoverImage = "", Price = 44},
-                new Book {Id = 10, Title = "Book 10", Description = "Description 10", Author= "Author 10", CoverImage = "", Price = 44}
+                new Book {Id = 1, Title = "Book 1", Description = "Description 1", Author= new Author {FirstName = "FirstName 1", LastName = "LastName 1" }, CoverImage = "", Price = 44} ,
+                new Book {Id = 2, Title = "Book 2", Description = "Description 2", Author= new Author {FirstName = "FirstName 2", LastName = "LastName 2" }, CoverImage = "", Price = 44},
+                new Book {Id = 3, Title = "Book 3", Description = "Description 3", Author= new Author {FirstName = "FirstName 3", LastName = "LastName 3" }, CoverImage = "", Price = 44},
+                new Book {Id = 4, Title = "Book 4", Description = "Description 4", Author= new Author {FirstName = "FirstName 4", LastName = "LastName 4" }, CoverImage = "", Price = 44},
+                new Book {Id = 5, Title = "Book 5", Description = "Description 5", Author= new Author {FirstName = "FirstName 5", LastName = "LastName 5" }, CoverImage = "", Price = 44},
+                new Book {Id = 6, Title = "Book 6", Description = "Description 6", Author= new Author {FirstName = "FirstName 6", LastName = "LastName 6" }, CoverImage = "", Price = 44},
+                new Book {Id = 7, Title = "Book 7", Description = "Description 7", Author= new Author {FirstName = "FirstName 7", LastName = "LastName 7" }, CoverImage = "", Price = 44},
+                new Book {Id = 8, Title = "Book 8", Description = "Description 8", Author= new Author {FirstName = "FirstName 8", LastName = "LastName 8" }, CoverImage = "", Price = 44},
+                new Book {Id = 9, Title = "Book 9", Description = "Description 9", Author= new Author {FirstName = "FirstName 9", LastName = "LastName 9" }, CoverImage = "", Price = 44},
+                new Book {Id = 10, Title = "Book 10", Description = "Description 10", Author= new Author {FirstName = "FirstName 10", LastName = "LastName 10" }, CoverImage = "", Price = 44}
             };
 
             return bookList;
