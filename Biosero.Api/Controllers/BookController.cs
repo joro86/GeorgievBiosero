@@ -1,6 +1,8 @@
 ﻿using Biosero.Api.Models;
+using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -38,6 +40,33 @@ namespace Biosero.Api.Controllers
             var result = await _bookService.GetFilteredBookList(searchRequest);
 
             return Ok(result);
+        }
+
+
+        [HttpPost("create")]
+        [Authorize]
+        public async Task<IActionResult> Create([FromBody] BookDto book)
+        {
+            
+            return Ok();
+        }
+
+
+        [HttpPatch("update")]
+        [Authorize]
+        public async Task<IActionResult> Update([FromBody] BookDto book)
+        {
+
+            return Ok("");
+        }
+
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            return Ok("");
         }
     }
 }
