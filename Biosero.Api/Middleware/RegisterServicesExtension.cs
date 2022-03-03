@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Biosero.Service.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Biosero.Api.Middleware
 {
@@ -6,7 +7,7 @@ namespace Biosero.Api.Middleware
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-           
+            services.AddTransient<BookService>();
 
             return services;
         }

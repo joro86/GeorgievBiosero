@@ -9,6 +9,11 @@ namespace Biosero.Api.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
+        /// <summary>
+        /// Login Endpoint
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
