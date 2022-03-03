@@ -1,3 +1,4 @@
+using Biosero.Api.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,7 +26,12 @@ namespace Biosero.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureJwtAuthentication(Configuration);
+
             services.AddControllers();
+
+            //User to register DI
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +41,9 @@ namespace Biosero.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Hook up global exception handling middleware
+            app.UseMiddleware<GlobalErrorHandlerExtension>();
 
             app.UseHttpsRedirection();
 
