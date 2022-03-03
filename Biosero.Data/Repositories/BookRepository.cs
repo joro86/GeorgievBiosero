@@ -1,16 +1,13 @@
 ﻿using AutoFixture;
 using Biosero.Data.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Biosero.Data.Repositories
 {
     public class BookRepository
     {
-
         private IQueryable<Book> _data;
 
         public BookRepository()
@@ -18,12 +15,16 @@ namespace Biosero.Data.Repositories
             _data = GetFakeData().AsQueryable();
         }
 
-
         public  async Task<IQueryable<Book>> GetData()
         {
             return  await Task.Run(() => _data);
         }
 
+
+        public async Task<Book> GetById(int id)
+        {
+            return await Task.Run(() => _data.SingleOrDefault(x => x.Id == id));
+        }
 
         /// <summary>
         /// Using autofixture to generate fake data.
@@ -43,6 +44,5 @@ namespace Biosero.Data.Repositories
 
             return bookList;
         }
-
     }
 }

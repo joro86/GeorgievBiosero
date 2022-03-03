@@ -35,5 +35,14 @@ namespace Biosero.Service.Services
 
             return result;
         }
+
+        public async Task<BookDto> GetBookDetail(int id)
+        {
+            var book = await _bookRepository.GetById(id);
+
+            var result = _autoMapper.Map<BookDto>(book);
+
+            return result;
+        }
     }
 }

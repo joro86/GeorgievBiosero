@@ -22,9 +22,9 @@ namespace Biosero.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
         {
+            var result = await _bookService.GetBookDetail(id);
 
-
-            return Ok();
+            return Ok(result);
         }
 
         [HttpGet("list")]
