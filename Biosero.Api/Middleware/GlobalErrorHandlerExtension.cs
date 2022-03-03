@@ -14,7 +14,6 @@ namespace Biosero.Api.Middleware
     {
         private readonly RequestDelegate _next;
 
-
         public GlobalErrorHandlerExtension(RequestDelegate next)
         {
             _next = next;

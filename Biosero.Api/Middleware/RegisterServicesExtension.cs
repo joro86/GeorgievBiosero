@@ -1,7 +1,6 @@
 ﻿using Biosero.Api.Utilities;
 using Biosero.Data.Repositories;
 using Biosero.Service.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Biosero.Api.Middleware
@@ -16,7 +15,7 @@ namespace Biosero.Api.Middleware
             services.AddScoped<JwtHandler>();
 
             services.AddTransient<AuthenticationService>();
-            services.AddTransient<UserRepository>();
+            services.AddSingleton<UserRepository>();
 
             return services;
         }
