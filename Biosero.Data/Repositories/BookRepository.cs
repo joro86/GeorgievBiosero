@@ -20,10 +20,28 @@ namespace Biosero.Data.Repositories
             return  await Task.Run(() => _data);
         }
 
-
         public async Task<Book> GetById(int id)
         {
             return await Task.Run(() => _data.SingleOrDefault(x => x.Id == id));
+        }
+
+        public Book Add(Book book)
+        {
+            //This should be auto incremented by the DB.
+            //but his will do for now!!
+             var maxId = _data.Max(x => x.Id);
+            book.Id = maxId;
+
+            _data.Append(book);
+            return book;
+        }
+
+
+        public Book Update(Book bookToAdd)
+        {
+            var book = _data.FirstOrDefault(x =>  x.Id == bookToAdd.Id);
+            book = bookToAdd;
+            return book;
         }
 
         /// <summary>

@@ -44,5 +44,29 @@ namespace Biosero.Service.Services
 
             return result;
         }
+
+
+
+        public async Task<BookDto> CreateBook(BookDto book)
+        {
+
+
+        }
+
+
+
+        public async Task<BookDto> Update(BookDto book)
+        {
+
+       
+        }
+
+
+        public async Task Delete(int id)
+        {
+
+        
+        }
+
     }
 }
