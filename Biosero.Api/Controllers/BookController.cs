@@ -1,4 +1,6 @@
 ﻿using Biosero.Api.Models;
+using Biosero.Service.Models.Api;
+using Biosero.Service.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -9,6 +11,13 @@ namespace Biosero.Api.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        private readonly BookService _bookService;
+
+        public BookController(BookService bookService)
+        {
+            _bookService = bookService;
+        }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Detail(int id)
@@ -19,10 +28,11 @@ namespace Biosero.Api.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> List([FromQuery] SearchRequest searchRequest)
+        public async Task<IActionResult> List([FromQuery] BookSearchRequest searchRequest)
         {
-           
-            return Ok();
+            var result = await _bookService.GetFilteredBookList(searchRequest);
+
+            return Ok(result);
         }
     }
 }

@@ -9,11 +9,11 @@ namespace Biosero.Api.Middleware
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<BookService>();
-            services.AddScoped<BookRepository>();
+            services.AddTransient<BookService>();
+            services.AddSingleton<BookRepository>();
 
-            services.AddScoped<AuthenticationService>();
-            services.AddScoped<UserRepository>();
+            services.AddTransient<AuthenticationService>();
+            services.AddTransient<UserRepository>();
 
             return services;
         }

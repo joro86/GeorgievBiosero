@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Biosero.Service.Models
+namespace Biosero.Data.Models
 {
-    internal class User
+    public class User
     {
     }
 }
