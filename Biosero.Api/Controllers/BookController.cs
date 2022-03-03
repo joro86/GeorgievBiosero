@@ -42,31 +42,32 @@ namespace Biosero.Api.Controllers
             return Ok(result);
         }
 
-
         [HttpPost("create")]
         [Authorize]
         public async Task<IActionResult> Create([FromBody] BookDto book)
         {
-            
-            return Ok();
-        }
+            var result = _bookService.CreateBook(book);
 
+            return Ok(result);
+        }
 
         [HttpPatch("update")]
         [Authorize]
-        public async Task<IActionResult> Update([FromBody] BookDto book)
+        public IActionResult Update([FromBody] BookDto book)
         {
+            var result = _bookService.Update(book);
 
-            return Ok("");
+            return Ok(result);
         }
 
 
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
+             _bookService.Delete(id);
 
-            return Ok("");
+            return Ok();
         }
     }
 }

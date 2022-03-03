@@ -17,5 +17,7 @@ namespace Biosero.Data.Models
         public string CoverImage { get; set; }
 
         public decimal Price { get; set; }
+
+        public bool IsPublished { get; set; }
     }
 }

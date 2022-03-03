@@ -14,5 +14,7 @@
 
         public decimal Price { get; set; }
 
+        public bool IsPublished { get; set; }
+
     }
 }

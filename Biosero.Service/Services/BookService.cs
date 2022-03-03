@@ -45,27 +45,27 @@ namespace Biosero.Service.Services
             return result;
         }
 
-
-
-        public async Task<BookDto> CreateBook(BookDto book)
+        public BookDto CreateBook(BookDto book)
         {
+            var result = _autoMapper.Map<Book>(book);
+            var addedBook   = _bookRepository.Add(result);
+            var bookDto = _autoMapper.Map<BookDto>(addedBook);
+            return bookDto;
+        }
 
-
+        public BookDto Update(BookDto book)
+        {
+            var result = _autoMapper.Map<Book>(book);
+            var addedBook = _bookRepository.Update(result);
+            var bookDto = _autoMapper.Map<BookDto>(addedBook);
+            return bookDto;
         }
 
 
-
-        public async Task<BookDto> Update(BookDto book)
+        public void Delete(int id)
         {
+            _bookRepository.Delete(id);
 
-       
-        }
-
-
-        public async Task Delete(int id)
-        {
-
-        
         }
 
     }
