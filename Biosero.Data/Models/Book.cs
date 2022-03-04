@@ -12,12 +12,12 @@ namespace Biosero.Data.Models
 
         public string Description { get; set; }
 
-        public Author Author { get; set; }
-
         public string CoverImage { get; set; }
 
         public decimal Price { get; set; }
 
         public bool IsPublished { get; set; }
+
+        public User Author { get; set; }
     }
 }

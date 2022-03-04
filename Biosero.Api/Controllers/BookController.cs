@@ -3,7 +3,6 @@ using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -46,16 +45,17 @@ namespace Biosero.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Create([FromBody] BookDto book)
         {
-            var result = _bookService.CreateBook(book);
+            
+            var result = await _bookService.CreateBook(book);
 
             return Ok(result);
         }
 
         [HttpPatch("update")]
         [Authorize]
-        public IActionResult Update([FromBody] BookDto book)
+        public async Task<IActionResult> Update([FromBody] BookDto book)
         {
-            var result = _bookService.Update(book);
+            var result = await _bookService.Update(book);
 
             return Ok(result);
         }
@@ -63,9 +63,10 @@ namespace Biosero.Api.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-             _bookService.Delete(id);
+            //Make sure you are passing JWT token to this request in order to properly register IUserContext and get the correct user ID
+            await _bookService.Delete(id);
 
             return Ok();
         }

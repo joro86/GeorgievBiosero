@@ -20,6 +20,10 @@ namespace Biosero.Service.Utilities
 
                 config.CreateMap<AuthorDto, Author>();
                 config.CreateMap<Author, AuthorDto>();
+
+
+                config.CreateMap<UserDto, User>();
+                config.CreateMap<User, UserDto>();
             }));
         }
     }

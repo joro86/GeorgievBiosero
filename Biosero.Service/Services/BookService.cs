@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
+using Bioserio.COmmon;
 using Biosero.Data.Models;
 using Biosero.Data.Repositories;
 using Biosero.Service.Filters;
+using Biosero.Service.Interfaces;
 using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Utilities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Biosero.Service.Services
@@ -15,11 +15,13 @@ namespace Biosero.Service.Services
     public class BookService
     {
         private readonly BookRepository _bookRepository;
+        private readonly IUserContext _userContext;
         private IMapper _autoMapper;
 
-        public BookService(BookRepository bookRepository)
+        public BookService(BookRepository bookRepository, IUserContext userContext)
         {
             _bookRepository = bookRepository;
+            _userContext = userContext;
             _autoMapper = MapperHelper.Mapper;
         }
 
@@ -45,27 +47,32 @@ namespace Biosero.Service.Services
             return result;
         }
 
-        public BookDto CreateBook(BookDto book)
+        public async Task<BookDto> CreateBook(BookDto book)
         {
             var result = _autoMapper.Map<Book>(book);
-            var addedBook   = _bookRepository.Add(result);
+            var addedBook   = await _bookRepository.Add(result);
             var bookDto = _autoMapper.Map<BookDto>(addedBook);
             return bookDto;
         }
 
-        public BookDto Update(BookDto book)
+        public async Task<BookDto> Update(BookDto book)
         {
             var result = _autoMapper.Map<Book>(book);
-            var addedBook = _bookRepository.Update(result);
+            var addedBook = await _bookRepository.Update(result);
             var bookDto = _autoMapper.Map<BookDto>(addedBook);
             return bookDto;
         }
 
-
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            _bookRepository.Delete(id);
+            var currentUserId = _userContext.GetId();
 
+            var result = await _bookRepository.Delete(id, currentUserId);
+
+            if(result == null)
+            {
+                throw new BookNotFoundException("Book can't be unpublished");
+            }
         }
 
     }

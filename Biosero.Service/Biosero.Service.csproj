@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bioserio.COmmon\Bioserio.Common.csproj" />
     <ProjectReference Include="..\Biosero.Data\Biosero.Data.csproj" />
   </ItemGroup>
 

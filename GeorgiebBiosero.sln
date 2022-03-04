@@ -3,11 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biosero.Data", "Biosero.Data\Biosero.Data.csproj", "{16FEECF3-974D-4AB4-81A9-BBE1AAF9D0A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biosero.Data", "Biosero.Data\Biosero.Data.csproj", "{16FEECF3-974D-4AB4-81A9-BBE1AAF9D0A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biosero.Service", "Biosero.Service\Biosero.Service.csproj", "{D8EC00A7-5FAE-4F6D-A080-F0BF8BA53D4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biosero.Service", "Biosero.Service\Biosero.Service.csproj", "{D8EC00A7-5FAE-4F6D-A080-F0BF8BA53D4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biosero.Api", "Biosero.Api\Biosero.Api.csproj", "{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biosero.Api", "Biosero.Api\Biosero.Api.csproj", "{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bioserio.Common", "Bioserio.COmmon\Bioserio.Common.csproj", "{70870F81-72B6-43AE-AACD-4993D64E95CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D07AC98D-0DEF-4099-A767-6F67CCDA2AE4}"
+	ProjectSection(SolutionItems) = preProject
+		Readme.md = Readme.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +34,10 @@ Global
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

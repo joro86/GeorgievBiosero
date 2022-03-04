@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Bioserio.COmmon;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -34,12 +35,14 @@ namespace Biosero.Api.Middleware
                 switch (error)
                 {
                     case KeyNotFoundException e:
-                        Console.WriteLine(e.Message);
                         message = "Key Not Found";
                         response.StatusCode = (int)HttpStatusCode.NotFound;
                         break;
+                    case BookNotFoundException e:
+                        message = e.Message;
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
                     default:
-                        Console.WriteLine(error.Message);
                         message = "Error occured";
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         break;
