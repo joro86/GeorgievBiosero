@@ -11,6 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Biosero.Test.Api
@@ -18,8 +19,8 @@ namespace Biosero.Test.Api
     [TestClass]
     public class BookControllerTests
     {
-        private  BookController _controller;
-        private  BookService _bookService;
+        private BookController _controller;
+        private BookService _bookService;
         private BookRepository _bookRepository;
         private UserRepository _userRepository;
 
@@ -66,7 +67,6 @@ namespace Biosero.Test.Api
             Assert.AreEqual(_bookData[0].Price, book.Price);
         }
 
-
         [TestMethod]
         public async Task WillCreateNewBook()
         {
@@ -91,15 +91,11 @@ namespace Biosero.Test.Api
         [TestMethod]
         public async Task WillDelete()
         {
-            var fixture = new Fixture();
-
-            var bookRequest = 
-                fixture.Build<BookRequest>()
-                .Create();
-
             SetupUserId(_userId);
 
-            var apiResult = await _controller.Delete(_bookId) as ObjectResult;
+            var apiResult = await _controller.Delete(_bookId) as StatusCodeResult;
+
+            Assert.AreEqual(200, apiResult.StatusCode);
         }
 
         private void SetupUserId(int id)
