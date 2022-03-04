@@ -9,14 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biosero.Service", "Biosero.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biosero.Api", "Biosero.Api\Biosero.Api.csproj", "{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bioserio.Common", "Bioserio.COmmon\Bioserio.Common.csproj", "{70870F81-72B6-43AE-AACD-4993D64E95CF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D07AC98D-0DEF-4099-A767-6F67CCDA2AE4}"
 	ProjectSection(SolutionItems) = preProject
 		Readme.md = Readme.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bioserio.Test", "Bioserio.Test\Bioserio.Test.csproj", "{98743A40-CCCB-4649-9869-2B9DCA9E2CD9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +32,6 @@ Global
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38CFD75A-9DBD-4ED8-96C7-EFD21D0E27E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70870F81-72B6-43AE-AACD-4993D64E95CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98743A40-CCCB-4649-9869-2B9DCA9E2CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98743A40-CCCB-4649-9869-2B9DCA9E2CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98743A40-CCCB-4649-9869-2B9DCA9E2CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98743A40-CCCB-4649-9869-2B9DCA9E2CD9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

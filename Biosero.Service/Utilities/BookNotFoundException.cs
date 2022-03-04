@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bioserio.COmmon
+namespace Biosero.Service.Utilities
 {
     public class BookNotFoundException : Exception
     {
