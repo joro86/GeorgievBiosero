@@ -101,12 +101,6 @@ namespace Biosero.Test.Api
         private void SetupUserId(int id)
         {
             _mockIUserContext.Setup(x => x.GetId()).Returns(id);
-
-        }
-
-        private void SetupUserName(string name)
-        {
-            _mockIUserContext.Setup(x => x.GetName()).Returns(name);
         }
 
         private IList<Book> GetFakeBook(int id, int userId)
@@ -120,7 +114,6 @@ namespace Biosero.Test.Api
 
             return bookList;
         }
-
 
         private IList<User> GetFakeUsers(int id)
         {
