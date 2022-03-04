@@ -42,6 +42,10 @@ namespace Biosero.Api.Middleware
                         message = e.Message;
                         response.StatusCode = (int)HttpStatusCode.BadRequest;
                         break;
+                    case InvalidOperationException e:
+                        message = e.Message;
+                        response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        break;
                     default:
                         message = "Error occured";
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;

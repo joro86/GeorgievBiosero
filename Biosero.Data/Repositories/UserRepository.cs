@@ -26,6 +26,22 @@ namespace Biosero.Data.Repositories
             );
         }
 
+        public async Task<int> GetDarthVader()
+        {
+            return await Task.Run(() =>
+            {
+                var user = _data.SingleOrDefault(x => x.FirstName == "_Darth" && x.LastName == "Vader_");
+
+                if(user != null)
+                {
+                    return 0;
+                }
+
+                return user.Id;
+            }
+           );
+        }
+
         private IList<User> GetPrePopulatedData()
         {
             var bookList = new List<User> {

@@ -7,6 +7,7 @@ using Biosero.Service.Interfaces;
 using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,13 +16,15 @@ namespace Biosero.Service.Services
     public class BookService
     {
         private readonly BookRepository _bookRepository;
+        private readonly UserRepository _userRepository;
         private readonly IUserContext _userContext;
         private IMapper _autoMapper;
 
-        public BookService(BookRepository bookRepository, IUserContext userContext)
+        public BookService(BookRepository bookRepository, IUserContext userContext, UserRepository userRepository)
         {
             _bookRepository = bookRepository;
             _userContext = userContext;
+            _userRepository = userRepository;
             _autoMapper = MapperHelper.Mapper;
         }
 
@@ -49,6 +52,13 @@ namespace Biosero.Service.Services
 
         public async Task<BookDto> CreateBook(BookDto book)
         {
+            var currentUserId = _userContext.GetId();
+
+            if (await IsDarthVader(currentUserId))
+            {
+                throw new InvalidOperationException("_Darth Vader_ is unable to publish books");
+            }
+
             var result = _autoMapper.Map<Book>(book);
             var addedBook   = await _bookRepository.Add(result);
             var bookDto = _autoMapper.Map<BookDto>(addedBook);
@@ -73,6 +83,19 @@ namespace Biosero.Service.Services
             {
                 throw new BookNotFoundException("Book can't be unpublished");
             }
+        }
+
+
+        private async Task<bool> IsDarthVader(int currentUserId)
+        {
+            var darthVaderId = await _userRepository.GetDarthVader();
+
+            if (darthVaderId == currentUserId)
+            {
+                return true;
+            }
+
+            return false;
         }
 
     }

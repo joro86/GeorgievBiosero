@@ -13,7 +13,6 @@ namespace Biosero.Service.Utilities
 
         static MapperHelper()
         {
-
             Mapper = new Mapper(new MapperConfiguration(config => {
                 config.CreateMap<Book, BookDto>();
                 config.CreateMap<BookDto, Book>();
