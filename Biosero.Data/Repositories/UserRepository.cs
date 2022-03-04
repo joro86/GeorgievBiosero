@@ -17,6 +17,10 @@ namespace Biosero.Data.Repositories
             _data = GetPrePopulatedData();
         }
 
+        public UserRepository(IList<User> data)
+        {
+            _data = data;
+        }
 
         public async Task<User> GetById(string userName, string password)
         {
@@ -40,7 +44,7 @@ namespace Biosero.Data.Repositories
             {
                 var user = _data.SingleOrDefault(x => x.FirstName == "_Darth" && x.LastName == "Vader_");
 
-                if(user != null)
+                if(user == null)
                 {
                     return 0;
                 }

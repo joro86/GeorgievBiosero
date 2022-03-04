@@ -15,6 +15,12 @@ namespace Biosero.Data.Repositories
             _data = GetPrePopulatedData().AsQueryable();
         }
 
+        //I am using this to setup data for unit tests
+        public BookRepository(List<Book> bookList)
+        {
+            _data = bookList.AsQueryable();
+        }
+
         public async Task<IQueryable<Book>> GetData()
         {
             return await Task.Run(() => _data);
@@ -65,25 +71,6 @@ namespace Biosero.Data.Repositories
                 book.IsPublished = false;
                 return book;
             });
-        }
-
-        /// <summary>
-        /// Using autofixture to generate fake data.
-        /// In a real application, we are connecting to the Data source from here possible with EF.
-        /// </summary>
-        /// <returns></returns>
-        private IList<Book> GetFakeData()
-        {
-            var id = 1;
-
-            var fixture = new Fixture();
-
-            var bookList = fixture.Build<Book>()
-                .With(x => x.Id, ++id)
-                .CreateMany(20)
-                .ToList();
-
-            return bookList;
         }
 
         private IList<Book> GetPrePopulatedData()
