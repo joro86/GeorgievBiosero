@@ -1,9 +1,7 @@
-﻿namespace Biosero.Service.Models
+﻿namespace Biosero.Service.Models.Api
 {
-    public class BookDto
+    public class BookRequest
     {
-        public int Id { get; set; }
-
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -13,8 +11,5 @@
         public decimal Price { get; set; }
 
         public bool IsPublished { get; set; }
-
-        public UserDto Author { get; set; }
-
     }
 }

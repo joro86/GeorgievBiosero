@@ -26,6 +26,14 @@ namespace Biosero.Data.Repositories
             );
         }
 
+        public async Task<User> GetById(int id)
+        {
+            //In a real life application, this will be EF db calls. Faked this to be async sinse that is a better practice.
+            return await Task.Run(() =>
+            _data.SingleOrDefault(x => x.Id == id)
+            );
+        }
+
         public async Task<int> GetDarthVader()
         {
             return await Task.Run(() =>

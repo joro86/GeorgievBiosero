@@ -22,6 +22,16 @@ Let's make sure the book was unpublished:
 https://localhost:44302/api/book/3
 
 
+Create/Publish a book
+POST: https://localhost:44302/api/book/create
+BODY: 
+{
+    "title": "title",
+    "description": "Description",
+    "coverImage": "",
+    "price": 44,
+    "isPublished": true
+}
 
 
 

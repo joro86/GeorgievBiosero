@@ -50,7 +50,7 @@ namespace Biosero.Service.Services
             return result;
         }
 
-        public async Task<BookDto> CreateBook(BookDto book)
+        public async Task<BookDto> CreateBook(BookRequest book)
         {
             var currentUserId = _userContext.GetId();
 
@@ -59,7 +59,12 @@ namespace Biosero.Service.Services
                 throw new InvalidOperationException("_Darth Vader_ is unable to publish books");
             }
 
+            var author = await _userRepository.GetById(currentUserId);
+
             var result = _autoMapper.Map<Book>(book);
+            result.Author = author;
+
+
             var addedBook   = await _bookRepository.Add(result);
             var bookDto = _autoMapper.Map<BookDto>(addedBook);
             return bookDto;

@@ -43,7 +43,7 @@ namespace Biosero.Api.Controllers
 
         [HttpPost("create")]
         [Authorize]
-        public async Task<IActionResult> Create([FromBody] BookDto book)
+        public async Task<IActionResult> Create([FromBody] BookRequest book)
         {
             
             var result = await _bookService.CreateBook(book);
