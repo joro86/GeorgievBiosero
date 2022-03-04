@@ -19,7 +19,7 @@ namespace Biosero.Service.Services
         private readonly IUserContext _userContext;
         private IMapper _autoMapper;
 
-        public BookService(BookRepository bookRepository, IUserContext userContext, UserRepository userRepository)
+        public BookService(BookRepository bookRepository, UserRepository userRepository, IUserContext userContext)
         {
             _bookRepository = bookRepository;
             _userContext = userContext;
