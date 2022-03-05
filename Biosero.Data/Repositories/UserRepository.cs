@@ -57,7 +57,7 @@ namespace Biosero.Data.Repositories
         private IList<User> GetPrePopulatedData()
         {
             var bookList = new List<User> {
-                new User{ Id = 1, Email = "vader@gmail.com", FirstName = "_Darth", LastName = "Vader_", UserName= "_Darth", Password = "password" },
+                new User{ Id = 1, Email = "vader@gmail.com", FirstName = "_Darth", LastName = "Vader_", UserName= "darth", Password = "vader" },
                 new User{ Id = 2, Email = "email@gmail.com", FirstName = "FirstName", LastName = "LastName", UserName= "email", Password = "password" },
                 new User{ Id = 3, Email = "test@gmail.com", FirstName = "test", LastName = "test",  UserName= "test", Password = "password" }
             };

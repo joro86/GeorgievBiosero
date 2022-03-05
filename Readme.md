@@ -1,4 +1,5 @@
 I had fun creating this project. I tried to follow the requirements as closed to as I can.
+I tried to show my stryle of coding and how I write unit tests. 
 
 Here is somehting to know if you try to run this.
 
@@ -13,7 +14,13 @@ BODY:
 		"password": "password"
 	}
 
-All users are hardcoded in UserRepository. I registered it as Singleto to use the same instance.
+    User name and password for darth vader
+    	{
+		"username": "darth",
+		"password": "vader"
+	}
+
+All users are hardcoded in UserRepository. I registered it as Singleton to use the same instance.
 
 Login endpoint will return JWT toke that you can use to call the Delete(unpublish) endpoint;
 https://localhost:44302/api/book/3
