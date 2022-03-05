@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Biosero.Api\Biosero.Api.csproj" />
+    <ProjectReference Include="..\Biosero.Data\Biosero.Data.csproj" />
+    <ProjectReference Include="..\Biosero.Service\Biosero.Service.csproj" />
   </ItemGroup>
 
 </Project>

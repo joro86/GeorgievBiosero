@@ -6,9 +6,11 @@ using Biosero.Service.Interfaces;
 using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Services;
+using Biosero.Service.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -30,14 +32,15 @@ namespace Biosero.Test.Api
         private IList<Book> _bookData;
 
         private readonly int _userId = 55;
+        private readonly int _darthVaderUserId = 66;
         private IList<User> _userData;
 
         [TestInitialize]
         public void Init()
         {
-            _bookData = GetFakeBook(_bookId, _userId);
+            _bookData = SetupFakeBookList(_bookId, _userId);
 
-            _userData = GetFakeUsers(_userId);
+            _userData = SetupFakeUsers(_userId);
 
             _bookRepository = new BookRepository(_bookData.ToList());
             _userRepository = new UserRepository(_userData.ToList());
@@ -55,7 +58,7 @@ namespace Biosero.Test.Api
         }
 
         [TestMethod]
-        public async Task WillGetBooksById()
+        public async Task Detail_WillGetBooksById()
         {
             var apiResult = await _controller.Detail(_bookId) as ObjectResult;
 
@@ -68,7 +71,7 @@ namespace Biosero.Test.Api
         }
 
         [TestMethod]
-        public async Task WillCreateNewBook()
+        public async Task Create_WillCreateNewBook()
         {
             var fixture = new Fixture();
 
@@ -88,14 +91,117 @@ namespace Biosero.Test.Api
             Assert.AreEqual(_userData[0].LastName, book.Author.LastName);
         }
 
+
         [TestMethod]
-        public async Task WillDelete()
+        public void Create_WillPreventDarthVadorToPublishABook()
+        {
+            var fixture = new Fixture();
+
+            var bookRequest = fixture.Build<BookRequest>()
+                .Create();
+
+            SetupUserId(_darthVaderUserId);
+
+            Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await _controller.Create(bookRequest));
+        }
+
+        [TestMethod]
+        public async Task Delete_WillUnpublishBook()
         {
             SetupUserId(_userId);
 
-            var apiResult = await _controller.Delete(_bookId) as StatusCodeResult;
+              var apiResult = await _controller.Delete(_bookId) as StatusCodeResult;
 
             Assert.AreEqual(200, apiResult.StatusCode);
+
+            var afterDelete = await _controller.Detail(_bookId) as ObjectResult;
+            var result = (BookDto)afterDelete.Value;
+
+            Assert.IsFalse(result.IsPublished);
+        }
+
+        [TestMethod]
+        public void Delete_WillBookNotFoundException_WhenBookIsNotFound()
+        {
+            Assert.ThrowsExceptionAsync<BookNotFoundException>(async () =>await _controller.Detail(998989));
+        }
+
+        [TestMethod]
+        public async Task Update_WillUpdateBook()
+        {
+            var fixture = new Fixture();
+
+            var newBook = fixture.Build<BookRequest>().Create();
+
+            SetupUserId(_userId);
+
+            var apiResult = await _controller.Create(newBook) as ObjectResult;
+
+            var result = (BookDto)apiResult.Value;
+
+            result.Title = "Some New Title";
+
+            var updatedResponce = await _controller.Update(result) as ObjectResult;
+
+            var book = (BookDto)updatedResponce.Value;
+
+            Assert.AreEqual(result.Title, book.Title);
+        }
+
+
+        [TestMethod]
+        public async Task List_WillGetListOfBooks()
+        {
+            var apiResult = await _controller.List(new BookSearchRequest()) as ObjectResult;
+
+            Assert.AreEqual(200, apiResult.StatusCode);
+
+            var result = (List<BookDto>)apiResult.Value;
+
+            Assert.AreEqual(2, result.Count);
+        }
+
+
+        [TestMethod]
+        public async Task List_FilterByTitle()
+        {
+            var serachRequest = new BookSearchRequest
+            {
+                Title = _bookData[0].Title
+            };
+
+            var apiResult = await _controller.List(serachRequest) as ObjectResult;
+
+            Assert.AreEqual(200, apiResult.StatusCode);
+
+            var result = (List<BookDto>)apiResult.Value;
+
+            Assert.AreEqual(1, result.Count);
+
+            Assert.AreEqual(_bookData[0].Title, result[0].Title);
+            Assert.AreEqual(_bookData[0].Description, result[0].Description);
+            Assert.AreEqual(_bookData[0].Price, result[0].Price);
+        }
+
+        [TestMethod]
+        public async Task List_FilterByDescription()
+        {
+            var serachRequest = new BookSearchRequest
+            {
+                Description = _bookData[1].Description
+            };
+
+            var apiResult = await _controller.List(serachRequest) as ObjectResult;
+
+            Assert.AreEqual(200, apiResult.StatusCode);
+
+            var result = (List<BookDto>)apiResult.Value;
+
+            Assert.AreEqual(1, result.Count);
+
+            Assert.AreEqual(_bookData[1].Title, result[0].Title);
+            Assert.AreEqual(_bookData[1].Description, result[0].Description);
+            Assert.AreEqual(_bookData[1].Price, result[0].Price);
         }
 
         private void SetupUserId(int id)
@@ -103,21 +209,34 @@ namespace Biosero.Test.Api
             _mockIUserContext.Setup(x => x.GetId()).Returns(id);
         }
 
-        private IList<Book> GetFakeBook(int id, int userId)
+        private IList<Book> SetupFakeBookList(int id, int userId)
         {
-            var fixture = new Fixture();
-
-            var bookList = fixture.Build<Book>()
-                .With(x => x.Id, id).With(x => x.Author, GetFakeUser(userId))
-                .CreateMany(1)
-                .ToList();
+            var bookList = new List<Book> 
+            {
+                GetFakeBook(id, userId),
+                GetFakeBook(++ id, ++userId)
+            };
 
             return bookList;
         }
 
-        private IList<User> GetFakeUsers(int id)
+        private Book GetFakeBook(int id, int userId)
         {
-            return new List<User> { GetFakeUser(id) };
+            var fixture = new Fixture();
+
+            var book = fixture.Build<Book>()
+                .With(x => x.Id, id).With(x => x.Author, GetFakeUser(userId))
+                .Create();
+
+            return book;
+        }
+
+        private IList<User> SetupFakeUsers(int id)
+        {
+            return new List<User> { 
+                GetFakeUser(id), 
+                GetFakeUser(_darthVaderUserId) 
+            };
         }
 
         private User GetFakeUser(int id)

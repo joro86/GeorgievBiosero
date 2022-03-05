@@ -66,7 +66,7 @@ namespace Biosero.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             //Make sure you are passing JWT token to this request in order to properly register IUserContext and get the correct user ID
-            await _bookService.Delete(id);
+            await  _bookService.Delete(id);
 
             return Ok();
         }

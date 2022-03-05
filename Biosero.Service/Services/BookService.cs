@@ -63,7 +63,6 @@ namespace Biosero.Service.Services
             var result = _autoMapper.Map<Book>(book);
             result.Author = author;
 
-
             var addedBook   = await _bookRepository.Add(result);
             var bookDto = _autoMapper.Map<BookDto>(addedBook);
             return bookDto;

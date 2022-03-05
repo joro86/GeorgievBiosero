@@ -50,9 +50,13 @@ namespace Biosero.Data.Repositories
         {
             return await Task.Run(() =>
             {
-
                 var book = _data.FirstOrDefault(x => x.Id == bookToAdd.Id);
-                book = bookToAdd;
+                book.Title = bookToAdd.Title;
+                book.Description = bookToAdd.Description;
+                book.IsPublished = bookToAdd.IsPublished;
+                book.CoverImage = bookToAdd.CoverImage;
+                book.Price = bookToAdd.Price;
+
                 return book;
             });
         }
