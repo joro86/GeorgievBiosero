@@ -8,12 +8,12 @@ namespace Biosero.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly AuthenticationService _authenticationService;
-        private readonly JwtHandler _jwtHandler;
+        private readonly IJwtHandler _jwtHandler;
 
-        public AuthenticationController(JwtHandler jwtHandler, AuthenticationService authenticationService)
+        public AuthController(IJwtHandler jwtHandler, AuthenticationService authenticationService)
         {
             _jwtHandler = jwtHandler;
             _authenticationService = authenticationService;
@@ -30,7 +30,12 @@ namespace Biosero.Api.Controllers
 
                 var result = await _authenticationService.Login(loginRequest.Username, loginRequest.Password);
 
-                var token = _jwtHandler.GenerateToken(result); ;
+                if(result == null)
+                {
+                    return BadRequest(new AuthResponseDto { ErrorMessage = "Invalid User Name and Password" });
+                }
+
+                var token = _jwtHandler.GenerateToken(result);
 
                 return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
         }

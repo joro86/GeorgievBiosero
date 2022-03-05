@@ -6,7 +6,7 @@ Please do not run the [Authorize] endpoint without without passing JWT token to 
 If you do, expect an exception since the app will not be able to get the user ID from the JWT token.
 Here is how to generate one..
 
-POST: https://localhost:44302/api/authentication/login
+POST: https://localhost:44302/api/auth/login
 BODY: 
 	{
 		"username": "test",

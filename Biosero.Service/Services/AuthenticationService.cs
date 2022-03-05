@@ -21,6 +21,11 @@ namespace Biosero.Service.Services
         {
             var user = await _userRepository.GetById(userName, password);
 
+            if(user == null)
+            {
+                return null;
+            }
+
             var result = _autoMapper.Map<UserDto>(user);
 
             return result;

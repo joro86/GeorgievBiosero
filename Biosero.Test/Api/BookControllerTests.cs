@@ -7,6 +7,7 @@ using Biosero.Service.Models;
 using Biosero.Service.Models.Api;
 using Biosero.Service.Services;
 using Biosero.Service.Utilities;
+using Biosero.Test.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -32,15 +33,14 @@ namespace Biosero.Test.Api
         private IList<Book> _bookData;
 
         private readonly int _userId = 55;
-        private readonly int _darthVaderUserId = 66;
         private IList<User> _userData;
 
         [TestInitialize]
         public void Init()
         {
-            _bookData = SetupFakeBookList(_bookId, _userId);
+            _bookData = FakeBookData.SetupFakeBookList(_bookId, _userId);
 
-            _userData = SetupFakeUsers(_userId);
+            _userData = FakeUserData.SetupFakeUsers(_userId);
 
             _bookRepository = new BookRepository(_bookData.ToList());
             _userRepository = new UserRepository(_userData.ToList());
@@ -100,7 +100,7 @@ namespace Biosero.Test.Api
             var bookRequest = fixture.Build<BookRequest>()
                 .Create();
 
-            SetupUserId(_darthVaderUserId);
+            SetupUserId(FakeUserData._darthVaderUserId);
 
             Assert.ThrowsExceptionAsync<InvalidOperationException>(async () => await _controller.Create(bookRequest));
         }
@@ -207,47 +207,6 @@ namespace Biosero.Test.Api
         private void SetupUserId(int id)
         {
             _mockIUserContext.Setup(x => x.GetId()).Returns(id);
-        }
-
-        private IList<Book> SetupFakeBookList(int id, int userId)
-        {
-            var bookList = new List<Book> 
-            {
-                GetFakeBook(id, userId),
-                GetFakeBook(++ id, ++userId)
-            };
-
-            return bookList;
-        }
-
-        private Book GetFakeBook(int id, int userId)
-        {
-            var fixture = new Fixture();
-
-            var book = fixture.Build<Book>()
-                .With(x => x.Id, id).With(x => x.Author, GetFakeUser(userId))
-                .Create();
-
-            return book;
-        }
-
-        private IList<User> SetupFakeUsers(int id)
-        {
-            return new List<User> { 
-                GetFakeUser(id), 
-                GetFakeUser(_darthVaderUserId) 
-            };
-        }
-
-        private User GetFakeUser(int id)
-        {
-            var fixture = new Fixture();
-
-            var book = fixture.Build<User>()
-                .With(x => x.Id, id)
-                .Create();
-
-            return book;
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Biosero.Api.Utilities
 {
-    public class JwtHandler
+    public class JwtHandler : IJwtHandler
     {
         private readonly IConfiguration _configuration;
         private readonly IConfigurationSection _jwtSettings;
