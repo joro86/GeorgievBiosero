@@ -44,7 +44,6 @@ namespace Biosero.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            //Hook up global exception handling middleware
             app.UseMiddleware<GlobalErrorHandlerExtension>();
 
             app.UseHttpsRedirection();

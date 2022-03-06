@@ -27,12 +27,6 @@ namespace Biosero.Api.Controllers
             return Ok(result);
         }
 
-        /// <summary>
-        /// User Query string parameter to serach for Title, Description, Author...
-        /// Example /api/book/list?title=book 1
-        /// </summary>
-        /// <param name="searchRequest"></param>
-        /// <returns></returns>
         [HttpGet("list")]
         public async Task<IActionResult> List([FromQuery] BookSearchRequest searchRequest)
         {
@@ -65,7 +59,6 @@ namespace Biosero.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            //Make sure you are passing JWT token to this request in order to properly register IUserContext and get the correct user ID
             await  _bookService.Delete(id);
 
             return Ok();

@@ -19,25 +19,24 @@ namespace Biosero.Api.Controllers
             _authenticationService = authenticationService;
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(new AuthResponseDto { ErrorMessage = "User Name and Password are required" });
-                }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new AuthResponseDto { ErrorMessage = "User Name and Password are required" });
+            }
 
-                var result = await _authenticationService.Login(loginRequest.Username, loginRequest.Password);
+            var result = await _authenticationService.Login(loginRequest.Username, loginRequest.Password);
 
-                if(result == null)
-                {
-                    return BadRequest(new AuthResponseDto { ErrorMessage = "Invalid User Name and Password" });
-                }
+            if (result == null)
+            {
+                return BadRequest(new AuthResponseDto { ErrorMessage = "Invalid User Name and Password" });
+            }
 
-                var token = _jwtHandler.GenerateToken(result);
+            var token = _jwtHandler.GenerateToken(result);
 
-                return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
+            return Ok(new AuthResponseDto { IsAuthSuccessful = true, Token = token });
         }
     }
 }
